@@ -1,9 +1,14 @@
 <template>
   <div class="tbl">
     <table class="styled-table">
-      <TableHeader :header="header" :filterBy="filterBy" @headerClicked="headerClicked" @filterSelected="filterSelected"/>
+      <TableHeader :header="tableHeaders" :filterBy="filterBy" @headerClicked="headerClicked" @filterSelected="filterSelected"/>
       <tbody>
-        <TableRow :rowData="item" :rowIndex="index" :dateTimeFields="dateTimeFields" :key="`tbl-r-${index}`" v-for="(item, index) in tableData"/>
+        <template v-if="tableData.length">
+          <TableRow :rowData="item" :rowIndex="index" :dateTimeFields="dateTimeFields" :key="`tbl-r-${index}`" v-for="(item, index) in tableData"/>
+        </template>
+        <tr v-else>
+          <td colspan="9">No matching data</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -18,7 +23,8 @@ export default {
   props: {
     tableData: Array,
     filterBy: Object,
-    dateTimeFields: Array
+    dateTimeFields: Array,
+    tableHeaders: Array
   },
   components: {
     TableHeader,

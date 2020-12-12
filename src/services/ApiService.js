@@ -2,7 +2,7 @@ import userData from '@/data/accounts'
 
 // using async just because in real app it would be API calls
 export default {
-    getUserData: async function(page = 1, perPage = 10, sortBy, sortDirection = 'asc', filterValues = {}) {
+    getUserData: async function(page = 1, perPage = 10, sortBy, sortDirection = 'asc', filterValues = {}, searchTerm) {
         let data = this.getNormalisedData()
         if (sortBy && typeof Object.keys(data[0])[sortBy] !== undefined) {
             if (sortDirection === 'asc') {
@@ -15,6 +15,12 @@ export default {
         for (let field in filterValues) {
             data = data.filter(item => {
                 return item[field] === filterValues[field]
+            })
+        }
+        if (searchTerm && searchTerm.length) {
+            searchTerm = searchTerm.toLowerCase()
+            data = data.filter(item => {
+                return item['First Name'].toLowerCase().indexOf(searchTerm) !== -1 || item['Last Name'].indexOf(searchTerm) !== -1
             })
         }
         return data.slice(perPage * (page - 1), page * perPage)
@@ -32,5 +38,9 @@ export default {
             }
         })
         return userData
+    },
+
+    getUserDataFields: async function() {
+        return Object.keys(userData[0])
     }
 }

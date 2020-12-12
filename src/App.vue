@@ -102,6 +102,10 @@ h2, body {
   text-align: left;
   max-width: 300px;
 }
+
+.search input {
+  height: 20px;
+}
 .filter select {
   width: 60px;
 }

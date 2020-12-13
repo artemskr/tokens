@@ -60,6 +60,7 @@ export default {
       this.sortBy = field
       this.flipDirection()
       this.setData()
+      this.page = 1
     },
     filterSelected: function (field, value) {
       if (value !== '') {

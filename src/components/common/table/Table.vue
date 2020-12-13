@@ -63,6 +63,7 @@ export default {
       switch(headerName) {
         case 'amt':
         case 'createdDate':
+          this.page = 1
           this.$emit('sortByClicked', headerName)
           break
         default:

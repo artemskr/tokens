@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+import util from '@/lib/util'
 
 export default {
   name: 'TableRow',
@@ -17,7 +17,7 @@ export default {
   methods: {
     formatForDisplay: function(value, field) {
       if (this.dateTimeFields.includes(field)) {
-        return moment(value).format('DD/MM/YYYY')
+        return util.formatDateForDisplay(value, 'DD/MM/YYYY')
       }
       return value
     }

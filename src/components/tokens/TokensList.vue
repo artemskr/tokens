@@ -19,6 +19,7 @@ import Paginator from '@/components/common/Paginator.vue'
 import Search from '@/components/common/Search.vue'
 import Table from '@/components/common/table/Table.vue'
 import service from '@/services/ApiService.js'
+import util from '@/lib/util'
 
 export default {
   name: 'TokensList',
@@ -97,7 +98,11 @@ export default {
       this.accounts.forEach(item => {
         const row = []
         for (let el in item) {
-          row.push(item[el])
+          let value = item[el]
+          if (this.dateTimeFields.includes(el)) {
+            value = util.formatDateForDisplay(value)
+          }
+          row.push(value)
         }
         csv.push(row.join(','))
       })

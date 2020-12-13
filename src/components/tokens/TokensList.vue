@@ -8,14 +8,20 @@
         <button v-on:click.stop.prevent="exportToCSV('data.csv')" class="button_a">Export To CSV File</button>
       </div>
     </div>
-    <Table :tableData="accounts" :tableHeaders="tableHeaders" :filterBy="filterBy" :dateTimeFields="dateTimeFields"
-           @sortByClicked="sortByClicked" @filterSelected="filterSelected"/>
-    <Paginator :length="accounts.length"/>
+    <Table :tableData="accounts"
+           :tableHeaders="tableHeaders"
+           :filterBy="filterBy"
+           :dateTimeFields="dateTimeFields"
+           @sortByClicked="sortByClicked"
+           @filterSelected="filterSelected"
+           @pageSelected="pageSelected"
+           :perPage="perPage"
+           :totalRows="totalRows"
+    />
   </div>
 </template>
 
 <script>
-import Paginator from '@/components/common/Paginator.vue'
 import Search from '@/components/common/Search.vue'
 import Table from '@/components/common/table/Table.vue'
 import service from '@/services/ApiService.js'
@@ -26,8 +32,7 @@ export default {
   props: {},
   components: {
     Table,
-    Search,
-    Paginator
+    Search
   },
   data: function () {
     return {
@@ -35,6 +40,7 @@ export default {
       tableHeaders: [],
       page: 1,
       perPage: 10,
+      totalRows: 200,
       sortBy: null,
       sortDirection: 'desc',
       filterBy: {
@@ -63,6 +69,11 @@ export default {
       }
       this.setData()
     },
+    pageSelected: function(page) {
+      this.page = page
+      console.log(page)
+      this.setData()
+    },
     flipDirection: function () {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc'
     },
@@ -76,14 +87,16 @@ export default {
       this.setData()
     },
     setData: async function () {
-      this.accounts = await service.getUserData(
-          this.page,
-          this.perPage,
-          this.sortBy,
-          this.sortDirection,
-          this.filterValues,
-          this.searchTerm
-      )
+      const {accounts, total} = await service.getUserData({
+           page: this.page,
+           perPage: this.perPage,
+           sortBy: this.sortBy,
+           sortDirection: this.sortDirection,
+           filterValues: this.filterValues,
+           searchTerm: this.searchTerm
+          })
+      this.accounts = accounts
+      this.totalRows = total
     },
     setTableHeaders: async function () {
       this.tableHeaders = await service.getUserDataFields()

@@ -11,6 +11,18 @@
         </tr>
       </tbody>
     </table>
+    <paginate
+        v-if="showPaginator"
+        v-model="page"
+        :page-count="Math.ceil(totalRows/perPage)"
+        :page-range="3"
+        :margin-pages="2"
+        :click-handler="pageSelected"
+        :prev-text="'Prev'"
+        :next-text="'Next'"
+        :container-class="'pagination'"
+        :page-class="'page-item'">
+    </paginate>
   </div>
 </template>
 
@@ -24,14 +36,19 @@ export default {
     tableData: Array,
     filterBy: Object,
     dateTimeFields: Array,
-    tableHeaders: Array
+    tableHeaders: Array,
+    perPage: Number,
+    totalRows: Number
   },
   components: {
     TableHeader,
     TableRow
   },
   data: function() {
-    return {}
+    return {
+      page: 1,
+      showPaginator: false
+    }
   },
   computed: {
     header: function() {  
@@ -50,7 +67,21 @@ export default {
     },
     filterSelected: function(field, value) {
       this.$emit('filterSelected', field, value)
+    },
+    setShowPaginator: function() {
+      this.showPaginator = this.totalRows > this.perPage
+    },
+    pageSelected: function(page) {
+      this.$emit('pageSelected', page)
     }
+  },
+  watch: {
+    totalRows: function() {
+      this.setShowPaginator()
+    }
+  },
+  beforeMount() {
+    this.setShowPaginator()
   }
 }
 </script>

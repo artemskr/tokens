@@ -214,4 +214,47 @@ h2, body {
   transition: all 0.4s ease 0s;
 }
 
+.pagination a {
+  float: left;
+  padding: 8px 16px;
+  margin-left: 2px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  background-color: #009879;
+}
+
+.pagination  a.active {
+  background-color: #fff;
+}
+
+.pagination  a:hover:not(.active) {background-color: #6bc1b2;}
+
+.pagination   a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.pagination li {
+  float: left;
+  padding: 0;
+  text-decoration: none;
+  color: white;
+  background-color: white;
+  font-size: 1em;
+  list-style-type: none;
+}
+.pagination li.pagination-active {
+  background-color: white;
+}
+
+.pagination  li:hover:not(.active) {background-color: #009879;}
+
+.pagination.page-item.active {
+  background-color: #a5e3d7;
+}
 </style>

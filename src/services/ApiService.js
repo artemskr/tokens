@@ -20,7 +20,8 @@ export default {
         if (searchTerm && searchTerm.length) {
             searchTerm = searchTerm.toLowerCase()
             data = data.filter(item => {
-                return item['First Name'].toLowerCase().indexOf(searchTerm) !== -1 || item['Last Name'].indexOf(searchTerm) !== -1
+                return item['First Name'].toLowerCase().indexOf(searchTerm) !== -1 ||
+                  item['Last Name'].toLowerCase().indexOf(searchTerm) !== -1
             })
         }
         return data.slice(perPage * (page - 1), page * perPage)

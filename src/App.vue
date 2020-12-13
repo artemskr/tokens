@@ -64,6 +64,8 @@ h2, body {
   font-family: sans-serif;
   min-width: 1240px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  table-layout: fixed;
+  width: 1100px;
 }
 .styled-table thead tr {
   background-color: #009879;
@@ -74,8 +76,10 @@ h2, body {
 .styled-table td {
   padding: 12px 15px 8px;
   min-width: 80px;
-  max-width: 214px;
   overflow: hidden;
+}
+.wide-cell {
+  width: 185px;
 }
 .styled-table th {
   cursor: pointer;

@@ -1,7 +1,7 @@
 <template>
   <thead>
     <tr>
-      <th v-for="(h, index) in header" :key="`tbl-h-${index}`" @click="headerClicked(h)">{{h}}</th>
+      <th v-for="(h, index) in header" :key="`tbl-h-${index}`" @click="headerClicked(h)" :class="(index === header.length - 1) ? 'wide-cell': ''">{{h}}</th>
     </tr>
     <tr>
       <th v-for="(h, index) in header" :key="`tbl-h-2-${index}`" @click="headerClicked(h)" style="padding-top: 0">

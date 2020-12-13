@@ -15,9 +15,7 @@ export default {
   },
   watch: {
     searchTerm: function(val) {
-      if (val.length >= 1) {
-        this.$emit('searchTriggered', val)
-      }
+      this.$emit('searchTriggered', val)
     }
   }
 }

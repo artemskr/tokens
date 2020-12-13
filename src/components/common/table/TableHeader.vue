@@ -1,7 +1,7 @@
 <template>
   <thead>
     <tr>
-      <th v-for="(h, index) in header" :key="`tbl-h-${index}`" @click="headerClicked(h)" :class="(index === header.length - 1) ? 'wide-cell': ''">{{h}}</th>
+      <th v-for="(h, index) in header" :key="`tbl-h-${index}`" @click="headerClicked(h)" :class="wideCell(index)">{{h}}</th>
     </tr>
     <tr>
       <th v-for="(h, index) in header" :key="`tbl-h-2-${index}`" @click="headerClicked(h)" style="padding-top: 0">
@@ -32,6 +32,9 @@ export default {
     },
     filterSelected: function(field, value) {
       this.$emit('filterSelected', field, value)
+    },
+    wideCell: function(index) {
+      return (index === this.header.length - 1) || index === 3 ? 'wide-cell': ''
     }
   }
 }

@@ -31,7 +31,6 @@ export default {
                   item['Last Name'].toLowerCase().indexOf(params.searchTerm) !== -1
             })
         }
-        console.log(data.length)
         return {
             accounts: data.slice(params.perPage * (params.page - 1), params.page * params.perPage),
             total: data.length

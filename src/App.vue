@@ -79,7 +79,7 @@ h2, body {
   overflow: hidden;
 }
 .wide-cell {
-  width: 185px;
+  width: 212px;
 }
 .styled-table th {
   cursor: pointer;
@@ -214,12 +214,16 @@ h2, body {
   transition: all 0.4s ease 0s;
 }
 
+.pagination {
+  display: inline-block;
+}
+
 .pagination a {
   float: left;
   padding: 8px 16px;
   margin-left: 2px;
   text-decoration: none;
-  border: 1px solid #ddd;
+  border: 1px solid #fff;
   background-color: #009879;
 }
 
@@ -252,9 +256,20 @@ h2, body {
   background-color: white;
 }
 
-.pagination  li:hover:not(.active) {background-color: #009879;}
+.pagination  li:hover:not(.active) {background-color: #fff;}
 
-.pagination.page-item.active {
-  background-color: #a5e3d7;
+li.page-item.active a {
+  background-color: #7bc4b5;
+}
+
+*:focus {
+  outline: 0;
+}
+
+.paginator-container {
+  position: relative;
+  margin-top: 30px;
+  min-height: 40px;
+  text-align: center;
 }
 </style>

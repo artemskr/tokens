@@ -11,18 +11,21 @@
         </tr>
       </tbody>
     </table>
-    <paginate
-        v-if="showPaginator"
-        v-model="page"
-        :page-count="Math.ceil(totalRows/perPage)"
-        :page-range="3"
-        :margin-pages="2"
-        :click-handler="pageSelected"
-        :prev-text="'Prev'"
-        :next-text="'Next'"
-        :container-class="'pagination'"
-        :page-class="'page-item'">
-    </paginate>
+    <div class="paginator-container">
+      <paginate
+          v-if="showPaginator"
+          v-model="page"
+          :page-count="Math.ceil(totalRows/perPage)"
+          :page-range="3"
+          :margin-pages="2"
+          :click-handler="pageSelected"
+          :prev-text="'Prev'"
+          :next-text="'Next'"
+          :container-class="'pagination'"
+          :page-class="'page-item'"
+          >
+      </paginate>
+    </div>
   </div>
 </template>
 
@@ -77,10 +80,12 @@ export default {
   },
   watch: {
     totalRows: function() {
+      this.page = 1
       this.setShowPaginator()
     }
   },
   beforeMount() {
+    this.page = 1
     this.setShowPaginator()
   }
 }

@@ -71,7 +71,6 @@ export default {
     },
     pageSelected: function(page) {
       this.page = page
-      console.log(page)
       this.setData()
     },
     flipDirection: function () {
@@ -97,6 +96,7 @@ export default {
           })
       this.accounts = accounts
       this.totalRows = total
+      this.page = 1
     },
     setTableHeaders: async function () {
       this.tableHeaders = await service.getUserDataFields()

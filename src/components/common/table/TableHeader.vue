@@ -1,11 +1,20 @@
 <template>
   <thead>
     <tr>
-      <th v-for="(h, index) in header" :key="`tbl-h-${index}`" @click="headerClicked(h)" :class="wideCell(index)">{{h}}</th>
+      <th v-for="(h, index) in headers"
+          :key="`tbl-h-${index}`"
+          @click="headerClicked(h)"
+          :class="wideCell(h)">{{h}}</th>
     </tr>
     <tr>
-      <th v-for="(h, index) in header" :key="`tbl-h-2-${index}`" @click="headerClicked(h)" style="padding-top: 0">
-          <FilterDropdown v-if="showFilter(h)" :filterBy="filterBy[h]" :field="h" @filterSelected="filterSelected"/>
+      <th v-for="(h, index) in headers"
+          :key="`tbl-h-2-${index}`"
+          @click="headerClicked(h)">
+
+          <FilterDropdown v-if="showFilter(h)"
+                          :filterBy="filterBy[h]"
+                          :field="h"
+                          @filterSelected="filterSelected"/>
       </th>
     </tr>
   </thead>
@@ -20,21 +29,24 @@ export default {
     FilterDropdown
   },
   props: {
-    header: Array,
+    headers: Array,
+    tableHeaders: Object,
     filterBy: Object
   },
   methods: {
     headerClicked: function(headerName) {
-      this.$emit('headerClicked', headerName)
+      if (this.tableHeaders[headerName].sortable) {
+        this.$emit('headerClicked', headerName)
+      }
     },
     showFilter: function (headerName) {
-      return Object.keys(this.filterBy).includes(headerName)
+      return this.tableHeaders[headerName].filterable
     },
     filterSelected: function(field, value) {
       this.$emit('filterSelected', field, value)
     },
-    wideCell: function(index) {
-      return (index === this.header.length - 1) || index === 3 ? 'wide-cell': ''
+    wideCell: function(headerName) {
+      return this.tableHeaders[headerName].wideCell ? 'wide-cell': ''
     }
   }
 }

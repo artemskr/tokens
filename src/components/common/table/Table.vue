@@ -1,10 +1,18 @@
 <template>
   <div class="tbl">
     <table class="styled-table">
-      <TableHeader :header="tableHeaders" :filterBy="filterBy" @headerClicked="headerClicked" @filterSelected="filterSelected"/>
+      <TableHeader :headers="Object.keys(tableHeaders)"
+                   :tableHeaders="tableHeaders"
+                   :filterBy="filterBy"
+                   @headerClicked="headerClicked"
+                   @filterSelected="filterSelected"/>
       <tbody>
         <template v-if="tableData.length">
-          <TableRow :rowData="item" :rowIndex="index" :dateTimeFields="dateTimeFields" :key="`tbl-r-${index}`" v-for="(item, index) in tableData"/>
+          <TableRow v-for="(item, index) in tableData"
+              :rowData="item"
+              :rowIndex="index"
+              :dateTimeFields="dateTimeFields"
+              :key="`tbl-r-${index}`"/>
         </template>
         <tr v-else>
           <td colspan="9">No matching data</td>
@@ -39,7 +47,7 @@ export default {
     tableData: Array,
     filterBy: Object,
     dateTimeFields: Array,
-    tableHeaders: Array,
+    tableHeaders: Object,
     perPage: Number,
     totalRows: Number
   },
@@ -53,20 +61,10 @@ export default {
       showPaginator: false
     }
   },
-  computed: {
-    header: function() {  
-      return this.tableData[0] && Object.keys(this.tableData[0])
-    }
-  },
   methods: {
     headerClicked: function(headerName) {
-      switch(headerName) {
-        case 'amt':
-        case 'createdDate':
-          this.page = 1
-          this.$emit('sortByClicked', headerName)
-          break
-        default:
+      if (this.tableHeaders[headerName].sortable) {
+        this.$emit('sortByClicked', headerName)
       }
     },
     filterSelected: function(field, value) {

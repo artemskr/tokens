@@ -1,6 +1,7 @@
 import userData from '@/data/accounts'
 
 // using async just because in real app it would be API calls
+// all functions below is just mimicking API calls with page or (limit, offset), orderBy, search term...
 export default {
     getUserData: async function(parameters) {
         const defaults = {

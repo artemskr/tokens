@@ -2,7 +2,9 @@
   <div class="filter">
     <select v-model="selectedFilter" class="select-css">
       <option selected></option>
-      <option v-for="(f, index) in filterBy" :selected="selectedFilter === f" :key="`filter-opt-${field}-${index}`">{{ f }}</option>
+      <option v-for="(f, index) in filterBy"
+              :selected="selectedFilter === f"
+              :key="`filter-opt-${field}-${index}`">{{ f }}</option>
     </select>
   </div>
 </template>

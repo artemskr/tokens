@@ -37,7 +37,7 @@ export default {
   data: function () {
     return {
       accounts: [],
-      tableHeaders: [],
+      tableHeaders: {},
       page: 1,
       perPage: 10,
       totalRows: 200,
@@ -100,12 +100,24 @@ export default {
       this.page = 1
     },
     setTableHeaders: async function () {
-      this.tableHeaders = await service.getUserDataFields()
+      const headers = await service.getUserDataFields()
+      headers.forEach(item => {
+        this.tableHeaders[item] = {}
+        if (['email', 'ReferredBy'].includes(item)) {
+          this.tableHeaders[item].wideCell = true
+        }
+        if (['amt', 'createdDate'].includes(item)) {
+          this.tableHeaders[item].sortable = true
+        }
+        if (['Country', 'mfa'].includes(item)) {
+          this.tableHeaders[item].filterable = true
+        }
+      })
     },
     exportToCSV: function (fileName) {
       const csv = []
       const row = []
-      this.tableHeaders.forEach(item => {
+      Object.keys(this.tableHeaders).forEach(item => {
         row.push(item)
       })
       csv.push(row.join(','))

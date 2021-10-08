@@ -9,7 +9,9 @@
     <tr>
       <th v-for="(h, index) in headers"
           :key="`tbl-h-2-${index}`"
-          @click="headerClicked(h)">
+          @click="headerClicked(h)"
+          class="s-header"
+          >
 
           <FilterDropdown v-if="showFilter(h)"
                           :filterBy="filterBy[h]"

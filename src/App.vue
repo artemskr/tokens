@@ -37,17 +37,18 @@ h2, body {
   position: relative;
   text-align: center;
   margin: auto;
+}
+.tbl {
   margin-left: 120px;
-  width: 66%;
+  width: 79;
 }
 .header {
   position: relative;
-  min-height: 100px;
+  min-height: 70px;
   left: 0;
   bottom: 0;
   width: 100%;
   text-align: center;
-  padding-top: 20px;
 }
 .footer {
   position: relative;
@@ -102,6 +103,8 @@ h2, body {
 .table-controls {
   position: relative;
   min-height: 20px;
+  margin-left: 120px;
+  width: 84%;
 }
 .search {
   text-align: left;
@@ -191,6 +194,11 @@ h2, body {
 }
 .float-rgt {
   float:right;
+  margin-right: 3px;
+}
+.s-header {
+  background-color: #7bc4b5 !important;
+  padding: 4px 11px 4px !important;
 }
 
 .button_a {
@@ -272,5 +280,6 @@ li.page-item.active a {
   margin-top: 30px;
   min-height: 40px;
   text-align: center;
+  width: 88%;
 }
 </style>

@@ -37,6 +37,7 @@ h2, body {
   position: relative;
   text-align: center;
   margin: auto;
+  margin-left: 120px;
   width: 66%;
 }
 .header {
@@ -49,7 +50,7 @@ h2, body {
   padding-top: 20px;
 }
 .footer {
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
   width: 100%;

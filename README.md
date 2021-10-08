@@ -1,2 +1,2 @@
 # tokens
-Live demo https://artemskr.github.io/demo/
+Live demo https://vibrant-visvesvaraya-514770.netlify.app/
